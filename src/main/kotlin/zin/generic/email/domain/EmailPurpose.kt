@@ -1,5 +1,7 @@
 package zin.generic.email.domain
 
-enum class EmailPurpose {
+import zin.generic.Purpose
+
+enum class EmailPurpose : Purpose {
     NEWSLETTER,
 }

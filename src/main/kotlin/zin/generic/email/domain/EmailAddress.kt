@@ -1,8 +1,7 @@
 package zin.generic.email.domain
 
-import jakarta.persistence.Embeddable
+import zin.generic.Account
 
-@Embeddable
-data class EmailAddress(
-    val account: String,
-)
+class EmailAddress(
+    account: String,
+) : Account(account)

@@ -1,6 +1,7 @@
 package zin.generic.email.domain.repository
 
 import org.springframework.data.jpa.repository.JpaRepository
+import zin.generic.Account
 import zin.generic.email.domain.EmailDispatch
 import zin.generic.email.domain.EmailAddress
 
