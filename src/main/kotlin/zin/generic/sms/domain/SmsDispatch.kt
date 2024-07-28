@@ -3,7 +3,7 @@ package zin.generic.sms.domain
 import jakarta.persistence.*
 
 @Entity
-class Sms(
+class SmsDispatch(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
@@ -17,7 +17,7 @@ class Sms(
 ) {
     companion object {
         fun create(account: PhoneNumber, message: String, purpose: SmsPurpose) =
-            Sms(account = account, message = message, purpose = purpose)
+            SmsDispatch(account = account, message = message, purpose = purpose)
     }
 
     fun buildRequest() = "Sending sms to ${account.account} with message: $message"

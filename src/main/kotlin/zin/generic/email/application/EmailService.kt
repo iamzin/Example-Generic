@@ -2,7 +2,7 @@ package zin.generic.email.application
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import zin.generic.email.domain.Email
+import zin.generic.email.domain.EmailDispatch
 import zin.generic.email.domain.EmailAddress
 import zin.generic.email.domain.EmailPurpose
 import zin.generic.email.domain.repository.EmailRepository
@@ -12,10 +12,10 @@ import zin.generic.email.domain.repository.EmailRepository
 class EmailService(
     private val emailRepository: EmailRepository,
 ) {
-    fun registerEmail(account: String, message: String, purpose: EmailPurpose): Email {
+    fun registerEmail(account: String, message: String, purpose: EmailPurpose): EmailDispatch {
         val emailAddress = EmailAddress(account)
 
-        return Email.create(emailAddress, message, purpose)
+        return EmailDispatch.create(emailAddress, message, purpose)
             .also { emailRepository.save(it) }
     }
 

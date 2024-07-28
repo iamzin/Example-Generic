@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.TestConstructor
 import org.springframework.transaction.annotation.Transactional
-import zin.generic.email.domain.Email
+import zin.generic.email.domain.EmailDispatch
 import zin.generic.email.domain.EmailPurpose
 
 @SpringBootTest
 @Transactional
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
-class EmailServiceTest(
+class EmailDispatchServiceTest(
     private val emailService: EmailService,
 ) {
     @Test
@@ -20,9 +20,9 @@ class EmailServiceTest(
         val account = "eunzin.park@gmail.com"
 
         // register
-        val email: Email = emailService.registerEmail(account, "Hello, World!", EmailPurpose.NEWSLETTER)
+        val emailDispatch: EmailDispatch = emailService.registerEmail(account, "Hello, World!", EmailPurpose.NEWSLETTER)
 
-        email.id shouldNotBe null
+        emailDispatch.id shouldNotBe null
 
         // send
         val result: String = emailService.sendEmail(account)

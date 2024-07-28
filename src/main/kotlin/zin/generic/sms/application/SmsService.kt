@@ -2,10 +2,8 @@ package zin.generic.sms.application
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import zin.generic.email.domain.EmailAddress
-import zin.generic.email.domain.repository.EmailRepository
 import zin.generic.sms.domain.PhoneNumber
-import zin.generic.sms.domain.Sms
+import zin.generic.sms.domain.SmsDispatch
 import zin.generic.sms.domain.SmsPurpose
 import zin.generic.sms.domain.repository.SmsRepository
 
@@ -14,10 +12,10 @@ import zin.generic.sms.domain.repository.SmsRepository
 class SmsService(
     private val smsRepository: SmsRepository,
 ) {
-    fun registerSms(account: String, message: String, purpose: SmsPurpose): Sms {
+    fun registerSms(account: String, message: String, purpose: SmsPurpose): SmsDispatch {
         val phoneNumber = PhoneNumber(account)
 
-        return Sms.create(phoneNumber, message, purpose)
+        return SmsDispatch.create(phoneNumber, message, purpose)
             .also { smsRepository.save(it) }
     }
 

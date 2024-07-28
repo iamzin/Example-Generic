@@ -7,7 +7,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 
 @Entity
-class Email(
+class EmailDispatch(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
@@ -21,7 +21,7 @@ class Email(
 ) {
     companion object {
         fun create(account: EmailAddress, message: String, purpose: EmailPurpose) =
-            Email(account = account, message = message, purpose = purpose)
+            EmailDispatch(account = account, message = message, purpose = purpose)
     }
 
     fun buildRequest() = "Sending email to ${account.account} with message: $message"
