@@ -15,5 +15,10 @@ class Sms(
 
     var purpose: SmsPurpose,
 ) {
+    companion object {
+        fun create(account: PhoneNumber, message: String, purpose: SmsPurpose) =
+            Sms(account = account, message = message, purpose = purpose)
+    }
+
     fun buildRequest() = "Sending sms to ${account.account} with message: $message"
 }

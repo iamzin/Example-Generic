@@ -5,6 +5,8 @@ import org.springframework.transaction.annotation.Transactional
 import zin.generic.email.domain.EmailAddress
 import zin.generic.email.domain.repository.EmailRepository
 import zin.generic.sms.domain.PhoneNumber
+import zin.generic.sms.domain.Sms
+import zin.generic.sms.domain.SmsPurpose
 import zin.generic.sms.domain.repository.SmsRepository
 
 @Service
@@ -12,6 +14,13 @@ import zin.generic.sms.domain.repository.SmsRepository
 class SmsService(
     private val smsRepository: SmsRepository,
 ) {
+    fun registerSms(account: String, message: String, purpose: SmsPurpose): Sms {
+        val phoneNumber = PhoneNumber(account)
+
+        return Sms.create(phoneNumber, message, purpose)
+            .also { smsRepository.save(it) }
+    }
+
     fun sendSms(account: String): String {
         val sms = smsRepository.findByAccount(PhoneNumber(account))
             ?: throw IllegalArgumentException("Email not found")

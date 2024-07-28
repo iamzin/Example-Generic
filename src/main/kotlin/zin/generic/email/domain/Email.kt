@@ -19,5 +19,10 @@ class Email(
 
     var purpose: EmailPurpose,
 ) {
+    companion object {
+        fun create(account: EmailAddress, message: String, purpose: EmailPurpose) =
+            Email(account = account, message = message, purpose = purpose)
+    }
+
     fun buildRequest() = "Sending email to ${account.account} with message: $message"
 }

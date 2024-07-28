@@ -2,7 +2,9 @@ package zin.generic.email.application
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import zin.generic.email.domain.Email
 import zin.generic.email.domain.EmailAddress
+import zin.generic.email.domain.EmailPurpose
 import zin.generic.email.domain.repository.EmailRepository
 
 @Service
@@ -10,6 +12,13 @@ import zin.generic.email.domain.repository.EmailRepository
 class EmailService(
     private val emailRepository: EmailRepository,
 ) {
+    fun registerEmail(account: String, message: String, purpose: EmailPurpose): Email {
+        val emailAddress = EmailAddress(account)
+
+        return Email.create(emailAddress, message, purpose)
+            .also { emailRepository.save(it) }
+    }
+
     fun sendEmail(account: String): String {
         val email = emailRepository.findByAccount(EmailAddress(account))
             ?: throw IllegalArgumentException("Email not found")
