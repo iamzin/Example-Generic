@@ -3,5 +3,5 @@ package zin.generic.email.domain
 import zin.generic.Account
 
 class EmailAddress(
-    account: String,
+    override var account: String,
 ) : Account(account)
